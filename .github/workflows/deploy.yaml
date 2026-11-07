@@ -22,3 +22,8 @@ jobs:
 
       - name: Push Docker image
         run: docker push ivanandrosov/cool_kapitsa:latest
+
+      - name: Trigger Render Deploy
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: curl --fail --silent --show-error -X POST "$RENDER_DEPLOY_HOOK_URL"
